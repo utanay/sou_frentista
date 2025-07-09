@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Cadastro</h2>
+        <form method="POST" action="/registrar">
+            <label>Nome completo</label>
+            <input type="text" name="nome" required>
+
+            <label>Usuário</label>
+            <input type="text" name="usuario" required>
+
+            <label>Senha</label>
+            <input type="password" name="senha" required>
+
+            <label>Confirmar senha</label>
+            <input type="password" name="confirmar_senha" required>
+
+            <button type="submit">Cadastrar</button>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="erro">
+                {{ messages[0] }}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <p class="register">Já tem conta? <a href="{{url_for('login')}}">Entrar</a>
+        </form>
+    </div>
+</body>
+
+</html>

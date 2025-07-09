@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Sistema de Caixa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Bem-Vindo Sistema Consulta meu Caixa.</h2>
+        <p>Faça login para acessar o sistema.</p>
+        <form method="POST" action="{{url_for('logar') }}">
+            <button type="submit">Entrar sem registrar</button>
+        </form>
+
+        <form>
+
+            <label for="usuario">Usuário</label>
+            <input type="text" id="usuario" placeholder="Digite seu usuário" required>
+
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" placeholder="Digite sua senha" required>
+
+            <button type="submit">Entrar</button>
+
+            <p class="register">Não tem conta? <a href="{{ url_for('cadastro') }}">Cadastre-se</a></p>
+        </form>
+    </div>
+</body>
+
+</html>

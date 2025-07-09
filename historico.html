@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <title>Histórico de Fechamento</title>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Histórico de Fechamento</h2>
+        <h3>Total do mês {{ mes_atual }}:
+            <span style="color: rgb(255, 255, 255);">R$ {{ "%.2f"|format(total_mes) }}</span>
+        </h3>
+
+        {% if fechamentos %}
+        <table border="3" style="width:100%; margin-top: 20px;">
+            <tr>
+                <th>Data</th>
+                <th>Valor arrecadado</th>
+                <th>Dinheiro do relatório</th>
+                <th>Sangria</th>
+                <th>Sobra/Falta</th>
+                <th>Comentário</th>
+            </tr>
+
+            {% for f in fechamentos %}
+            <tr>
+                <td>{{ f['data'] | formatar_data }}</td>
+                <td>R$ {{ "%.2f"|format(f['valor']) }}</td>
+                <td>R$ {{ "%.2f"|format(f['dinheiro_relatorio']) }}</td>
+                <td>R$ {{ "%.2f"|format(f['sangria']) }}</td>
+
+                {% set diferenca = f['sangria'] - f['dinheiro_relatorio'] %}
+
+                <td>
+                    {% if diferenca < 0 %} Nesse dia faltou R$ {{ "%.2f" |format(diferenca|abs) }} {% elif diferenca> 0
+                        %}
+                        Nesse dia sobrou R$ {{ "%.2f"|format(diferenca) }}
+                        {% else %}
+                        Fechamento exato
+                        {% endif %}
+                </td>
+
+                <td>{{ f['comentario'] or 'Sem comentário' }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>Nenhum fechamento registrado ainda.</p>
+        {% endif %}
+
+        <p class="register" style="margin-top: 30px;">
+            <a href="{{ url_for('painel') }}">Voltar ao Painel</a>
+        </p>
+    </div>
+</body>
+
+</html>

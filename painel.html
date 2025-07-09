@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF8">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <title>Painel do Frentista</title>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Painel do Frentista</h2>
+        <p>Selecione um módulo para continuar</p>
+
+        <a href="{{url_for('fechamento')}}">
+            <button type="button" style="margin-top: 20px; width: 100%;">Fazer fechamento do Dia</button>
+
+        <a href="{{ url_for('historico') }}">
+                <button type="button" style="margin-top: 20px; width: 100%;">Ver Histórico de Fechamentos</button>
+
+
+            </a>
+        </a>
+
+        <p class="register" style="margin-top: 30px;">
+            <a href="/">Sair</a>
+        </p>
+    </div>
+</body>
+
+</html>

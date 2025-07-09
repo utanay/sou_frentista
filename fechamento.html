@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Fechamento de Caixa</title>
+    
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Área de Registro do Fechamento do Dia!</h2>
+
+        <form action="{{ url_for('registrar_fechamento') }}" method="POST">
+            <label for="data">Data do Fechamento:</label>
+            <input type="date" name="data" required>
+
+            <label for="valor">Valor Total dos Abastecimentos (R$):</label>
+            <input type="number" name="valor" step="0.01" required>
+
+            <label for="dinheiro_relatorio">Dinheiro do Relatório (R$):</label>
+            <input type="number" step="0.01" name="dinheiro_relatorio" id="dinheiro_relatorio" required oninput="calcularDiferenca()">
+
+            <label for="sangria">Valor das Sangrias (R$):</label>
+            <input type="number" step="0.01" name="sangria" id="sangria" required oninput="calcularDiferenca()">
+
+
+            <div id="resultado" class="mensagem" style="margin-top:10px ;"></div>
+
+            <label for="comentario">Comentário (opcional):</label>
+            <textarea name="comentario" rows="3" cols="40"
+                placeholder="Descreva o motivo da diferença, se houver."></textarea>
+
+            <button type="submit">Registrar Fechamento</button>
+        </form>
+
+        <!-- MENSAGEM FLASH NO FINAL -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+        <div class="mensagem">
+            {{ messages[0] }}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        
+
+        <p class="register"><a href="{{ url_for('painel') }}">Voltar para o Painel</a></p>
+    </div>
+</body>
+<script>
+    function calcularDiferenca() {
+        const sangria = parseFloat(document.getElementById("sangria").value);
+        const relatorio = parseFloat(document.getElementById("dinheiro_relatorio").value);
+        const resultadoDiv = document.getElementById("resultado");
+
+        if (!isNaN(sangria) && !isNaN(relatorio)) {
+            const diferenca = sangria - relatorio;
+
+            if (diferenca > 0) {
+                resultadoDiv.textContent = `Sobrou R$ ${diferenca.toFixed(2)}`;
+                resultadoDiv.style.color = 'green';
+            } else if (diferenca < 0) {
+                resultadoDiv.textContent = `Faltou R$ ${Math.abs(diferenca).toFixed(2)}`;
+                resultadoDiv.style.color = 'red';
+            } else {
+                resultadoDiv.textContent = `Fechamento exato`;
+                resultadoDiv.style.color = 'black';
+            }
+        } else {
+            resultadoDiv.textContent = '';
+        }
+    }
+</script>
+
+</html>

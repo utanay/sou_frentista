@@ -1,0 +1,82 @@
+body {
+    background: linear-gradient(135deg, #0f479b, #7a753d);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+
+}
+
+.login-container h2 {
+    color: #f8fbff;
+    margin-bottom: 10px;
+
+}
+
+.login-container p {
+    color: #ffffff;
+    margin-bottom: 30px;
+
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #fff9f9;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #fffdfd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2980b9;
+
+}
+
+.register {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.register a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* estilo da menssagem do  modulo fechamento, que mostra quanto faltou ou sobrou na hora do registro de fechamento*/
+.mensagem {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f8ff;
+    color: #2c3e50;
+    border: 1px solid #b3d4fc;
+    font-weight: bold;
+    text-align: center;
+}
+
